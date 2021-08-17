@@ -9,20 +9,38 @@ class RepoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: () => Navigator.of(context)
-          .pushNamed(DescriptionScreen.routeName, arguments: repo),
-      dense: true,
-      contentPadding: EdgeInsets.all(8),
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-          side: BorderSide(
-              color: Colors.grey, width: 0.8, style: BorderStyle.solid)),
-      isThreeLine: true,
-      leading: Text(repo.id.toString()),
-      trailing: Text(repo.owner),
-      title: Text(repo.name),
-      subtitle: Text(repo.description),
+    return Card(
+      child: ListTile(
+        contentPadding: EdgeInsets.all(16),
+        onTap: () => Navigator.of(context)
+            .pushNamed(DescriptionScreen.routeName, arguments: repo),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            side: BorderSide(
+                color: Colors.grey, width: 0.8, style: BorderStyle.solid)),
+        leading: Container(
+          height: double.infinity,
+          child: Image(
+            image: AssetImage(
+              'assets/images/GitHub-Mark-32px.png',
+            ),
+            alignment: Alignment.bottomCenter,
+          ),
+        ),
+        title: Text(repo.name),
+        subtitle: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(padding: EdgeInsets.all(6)),
+              Text(repo.description),
+              Padding(padding: EdgeInsets.all(8)),
+              Row(
+                children: [Text('ID: ${repo.id.toString()}'), Text(repo.owner)],
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              )
+            ]),
+      ),
     );
   }
 }
