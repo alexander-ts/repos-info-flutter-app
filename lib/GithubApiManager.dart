@@ -8,13 +8,14 @@ class GithubApiManager
 
   Future<List<Repo>> getRepositories() async {
     List<Repo> repos = [];
+    print('[INFO] Getting repos from API.');
     try
     {
       var response = await http.get(uri);
       if (response.statusCode == 200)
       {
         var jsonList = convert.jsonDecode(response.body) as List<dynamic>;
-        for (Map<String, dynamic> json in jsonList)
+        for (var json in jsonList)
           repos.add(Repo.fromJson(json));
       }
       else
