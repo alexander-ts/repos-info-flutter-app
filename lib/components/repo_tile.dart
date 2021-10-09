@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:github_repos_info/models/Repo.dart';
-import 'package:github_repos_info/screens/DescriptionScreen.dart';
+import 'package:github_repos_info/models/repo.dart';
+import 'package:github_repos_info/screens/description_screen.dart';
 
+/// Виджет - карточка репозитория - элемент списка.
 class RepoTile extends StatelessWidget {
+  /// Конструктор карточки репозитория.
+  const RepoTile(this.repo, {Key? key}) : super(key: key);
+
+  /// Репозиторий.
   final Repo repo;
 
-  RepoTile(this.repo);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        contentPadding: EdgeInsets.all(16),
+        contentPadding: const EdgeInsets.all(16),
         onTap: () => Navigator.of(context)
             .pushNamed(DescriptionScreen.routeName, arguments: repo),
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            side: BorderSide(
-                color: Colors.grey, width: 0.8, style: BorderStyle.solid)),
-        leading: Container(
+            borderRadius: BorderRadius.circular(10),
+            side: const BorderSide(
+                color: Colors.grey, width: 0.8),),
+        leading: const SizedBox(
           height: double.infinity,
           child: Image(
             image: AssetImage(
@@ -32,12 +36,12 @@ class RepoTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(padding: EdgeInsets.all(6)),
+              const Padding(padding: EdgeInsets.all(6)),
               Text(repo.description),
-              Padding(padding: EdgeInsets.all(8)),
+              const Padding(padding: EdgeInsets.all(8)),
               Row(
-                children: [Text('ID: ${repo.id.toString()}'), Text(repo.owner)],
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [Text('ID: ${repo.id.toString()}'), Text(repo.owner)],
               )
             ]),
       ),
